@@ -1,8 +1,3 @@
-🔍 Problema identificado!
-O erro Permission denied acontece porque o arquivo mvnw não tem permissão de execução no Docker.
-✅ Solução: Atualizar o Dockerfile
-Substitua seu Dockerfile por esta versão corrigida:
-dockerfile# Estágio 1: Build
 FROM eclipse-temurin:17-jdk-alpine AS build
 
 WORKDIR /app
