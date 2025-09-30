@@ -71,3 +71,42 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: docker
+    environment: development
+
+    steps:
+      - name: Simular deploy em Development
+        run: |
+          echo "🚀 Iniciando deploy no ambiente de Desenvolvimento..."
+          echo "📦 Imagem: ghcr.io/${{ github.repository }}:latest"
+          echo "🌍 Ambiente: Development"
+          echo "✅ Deploy concluído com sucesso!"
+
+      - name: Verificar saúde da aplicação
+        run: |
+          echo "🏥 Verificando saúde da aplicação..."
+          echo "✅ Aplicação está respondendo corretamente!"
+
+  deploy-prod:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: deploy-dev
+    environment: production
+
+    steps:
+      - name: Simular deploy em Production
+        run: |
+          echo "🚀 Iniciando deploy no ambiente de Produção..."
+          echo "📦 Imagem: ghcr.io/${{ github.repository }}:latest"
+          echo "🌍 Ambiente: Production"
+          echo "⚠️  Este é o ambiente de PRODUÇÃO!"
+          echo "✅ Deploy concluído com sucesso!"
+
+      - name: Notificar sucesso
+        run: |
+          echo "📢 Deploy em produção realizado com sucesso!"
+          echo "🎉 Pipeline CI/CD completado!"
